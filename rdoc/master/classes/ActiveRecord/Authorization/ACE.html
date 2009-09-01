@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: ActiveRecord::Authorization::ACE</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=480,width=750" ).focus();
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />ActiveRecord::Authorization::ACE</td>
+  <td align="right">
+    <table cellspacing="0" cellpadding="2">
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../files/lib/active_record/authorization/ace_rb.html">lib/active_record/authorization/ace.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+Object
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+Access Control Entry (<a href="ACE.html">ACE</a>)
+</p>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000165">==</a></li>
+  <li><a href="#M000174">ACEPermission</a></li>
+  <li><a href="#M000168">action</a></li>
+  <li><a href="#M000169">action?</a></li>
+  <li><a href="#M000166">agent?</a></li>
+  <li><a href="#M000172">anyone?</a></li>
+  <li><a href="#M000173">inspect</a></li>
+  <li><a href="#M000164">new</a></li>
+  <li><a href="#M000170">objective</a></li>
+  <li><a href="#M000171">objective?</a></li>
+  <li><a href="#M000167">permission?</a></li>
+  </ul>
+
+
+
+
+
+  <div class="sectiontitle">Attributes</div>
+  <table border='0' cellpadding='5'>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>agent</td>
+    <td class='attr-desc'></td>
+  </tr>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>permission</td>
+    <td class='attr-desc'></td>
+  </tr>
+  </table>
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000164"></a><b>new</b>(agent, *args)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000164_source')" id="l_M000164_source">show source</a> ]</p>
+  <div id="M000164_source" class="dyn-source">
+<pre>
+   <span class="ruby-comment cmt"># File lib/active_record/authorization/ace.rb, line 7</span>
+7:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">agent</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+8:         <span class="ruby-ivar">@agent</span>, <span class="ruby-ivar">@permission</span> = <span class="ruby-identifier">agent</span>, <span class="ruby-constant">ACEPermission</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+9:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000165"></a><b>==</b>(ace)
+  </div>
+  <div class="description">
+  <p>
+Two ACEs are equivalent when their agents and permissions are the same
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000165_source')" id="l_M000165_source">show source</a> ]</p>
+  <div id="M000165_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/active_record/authorization/ace.rb, line 12</span>
+12:       <span class="ruby-keyword kw">def</span> <span class="ruby-operator">==</span>(<span class="ruby-identifier">ace</span>)
+13:         <span class="ruby-identifier">agent?</span>(<span class="ruby-identifier">ace</span>.<span class="ruby-identifier">agent</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">permission?</span>(<span class="ruby-identifier">ace</span>.<span class="ruby-identifier">permission</span>)
+14:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000174"></a><b>ACEPermission</b>(*args)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000174_source')" id="l_M000174_source">show source</a> ]</p>
+  <div id="M000174_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/active_record/authorization/ace.rb, line 55</span>
+55:       <span class="ruby-keyword kw">def</span> <span class="ruby-constant">ACEPermission</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+56:         <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">ACEPermission</span>) <span class="ruby-operator">?</span>
+57:           <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">:</span>
+58:           <span class="ruby-constant">ACEPermission</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+59:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000168"></a><b>action</b>()
+  </div>
+  <div class="description">
+  <p>
+Returns the <a href="ACE.html#M000168">action</a> of this <a
+href="ACE.html">ACE</a> permission
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000168_source')" id="l_M000168_source">show source</a> ]</p>
+  <div id="M000168_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/active_record/authorization/ace.rb, line 27</span>
+27:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">action</span>
+28:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">permission</span>.<span class="ruby-identifier">action</span>
+29:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000169"></a><b>action?</b>(action)
+  </div>
+  <div class="description">
+  <p>
+Is the <a href="ACE.html#M000168">action</a> of this <a
+href="ACE.html">ACE</a> permission equal to <a
+href="ACE.html#M000169">action?</a>
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000169_source')" id="l_M000169_source">show source</a> ]</p>
+  <div id="M000169_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/active_record/authorization/ace.rb, line 32</span>
+32:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">action?</span>(<span class="ruby-identifier">action</span>)
+33:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">permission</span>.<span class="ruby-identifier">action?</span>(<span class="ruby-identifier">action</span>)
+34:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000166"></a><b>agent?</b>(agent)
+  </div>
+  <div class="description">
+  <p>
+Is this <a href="ACE.html">ACE</a> agent equal to <a
+href="ACE.html#M000166">agent?</a>
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000166_source')" id="l_M000166_source">show source</a> ]</p>
+  <div id="M000166_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/active_record/authorization/ace.rb, line 17</span>
+17:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">agent?</span>(<span class="ruby-identifier">agent</span>)
+18:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">agent</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">agent</span>
+19:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000172"></a><b>anyone?</b>()
+  </div>
+  <div class="description">
+  <p>
+Is this <a href="ACE.html">ACE</a> agent equal to <a
+href="../../Anyone.html">Anyone</a>?
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000172_source')" id="l_M000172_source">show source</a> ]</p>
+  <div id="M000172_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/active_record/authorization/ace.rb, line 47</span>
+47:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">anyone?</span>
+48:         <span class="ruby-identifier">agent?</span>(<span class="ruby-constant">Anyone</span>.<span class="ruby-identifier">current</span>)
+49:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000173"></a><b>inspect</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000173_source')" id="l_M000173_source">show source</a> ]</p>
+  <div id="M000173_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/active_record/authorization/ace.rb, line 51</span>
+51:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">inspect</span>
+52:         <span class="ruby-node">&quot;#&lt;ACE: #{ agent.respond_to?(:name) &amp;&amp; &quot;\&quot;#{ agent.name }\&quot;&quot; || agent } #{ action } #{ objective }&gt;&quot;</span>
+53:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000170"></a><b>objective</b>()
+  </div>
+  <div class="description">
+  <p>
+Returns the <a href="ACE.html#M000170">objective</a> of this <a
+href="ACE.html">ACE</a> permission
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000170_source')" id="l_M000170_source">show source</a> ]</p>
+  <div id="M000170_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/active_record/authorization/ace.rb, line 37</span>
+37:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">objective</span>
+38:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">permission</span>.<span class="ruby-identifier">objective</span>
+39:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000171"></a><b>objective?</b>(objective)
+  </div>
+  <div class="description">
+  <p>
+Is the <a href="ACE.html#M000170">objective</a> of this <a
+href="ACE.html">ACE</a> permission equal to <a
+href="ACE.html#M000171">objective?</a>
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000171_source')" id="l_M000171_source">show source</a> ]</p>
+  <div id="M000171_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/active_record/authorization/ace.rb, line 42</span>
+42:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">objective?</span>(<span class="ruby-identifier">objective</span>)
+43:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">permission</span>.<span class="ruby-identifier">objective?</span>(<span class="ruby-identifier">objective</span>)
+44:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000167"></a><b>permission?</b>(*args)
+  </div>
+  <div class="description">
+  <p>
+Is this <a href="ACE.html">ACE</a> permission equivalent to args?
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000167_source')" id="l_M000167_source">show source</a> ]</p>
+  <div id="M000167_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/active_record/authorization/ace.rb, line 22</span>
+22:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">permission?</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+23:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">permission</span> <span class="ruby-operator">==</span> <span class="ruby-constant">ACEPermission</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+24:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

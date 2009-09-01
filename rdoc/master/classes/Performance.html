@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: Performance</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=480,width=750" ).focus();
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />Performance</td>
+  <td align="right">
+    <table cellspacing="0" cellpadding="2">
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../files/app/models/performance_rb.html">app/models/performance.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+ActiveRecord::Base
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+<a href="Performance.html">Performance</a> define the <a
+href="Role.html">Role</a> some Actor is playing in some Stage
+</p>
+<h2>Named scopes</h2>
+<p>
+stage_type(type): find Peformances by Stage type
+</p>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000007">avoid_uniq_first_role_downgrade</a></li>
+  <li><a href="#M000006">to_acl</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000007"></a><b>avoid_uniq_first_role_downgrade</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000007_source')" id="l_M000007_source">show source</a> ]</p>
+  <div id="M000007_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/performance.rb, line 40</span>
+40:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">avoid_uniq_first_role_downgrade</span>
+41:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">role_id_changed?</span> <span class="ruby-operator">&amp;&amp;</span>
+42:        <span class="ruby-identifier">role_id_was</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">stage</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">roles</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">&amp;&amp;</span>
+43:        <span class="ruby-constant">Performance</span>.<span class="ruby-identifier">find_all_by_stage_id_and_stage_type_and_role_id</span>(<span class="ruby-identifier">stage</span>.<span class="ruby-identifier">id</span>, <span class="ruby-identifier">stage</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">base_class</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">role_id_was</span>).<span class="ruby-identifier">count</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">2</span>
+44: 
+45:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">:role_id</span>, <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">t</span>(<span class="ruby-value str">'performance.errors.stage_should_not_run_out_of_performances_with_first_role'</span>,
+46:                              <span class="ruby-identifier">:role</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">stage</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">roles</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">name</span>))
+47:     <span class="ruby-keyword kw">end</span>
+48:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000006"></a><b>to_acl</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000006_source')" id="l_M000006_source">show source</a> ]</p>
+  <div id="M000006_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/performance.rb, line 30</span>
+30:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_acl</span>
+31:     <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Performance #{ id } hasn't any Role!&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">role</span>.<span class="ruby-identifier">blank?</span>
+32: 
+33:     <span class="ruby-identifier">to_acl</span> = <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Authorization</span><span class="ruby-operator">::</span><span class="ruby-constant">ACL</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">stage</span>)
+34: 
+35:     <span class="ruby-identifier">role</span>.<span class="ruby-identifier">ace_permissions</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-identifier">to_acl</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">acl</span>, <span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+36:       <span class="ruby-identifier">acl</span> <span class="ruby-operator">&lt;&lt;</span> [ <span class="ruby-identifier">agent</span>, <span class="ruby-identifier">p</span>]
+37:     <span class="ruby-keyword kw">end</span>
+38:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>
